@@ -5,7 +5,7 @@ const fs = require("fs");
 //calling express
 const app = express();
 //creating port for server
-const PORT = process.env.PORT || 8000;
+const PORT = process.env.PORT || 3001;
 //const keyDir = path.join(__dirname, "/public");
 
 app.use(express.static('public'));
@@ -49,6 +49,9 @@ app.delete("/api/notes/:id", (req, res) => {
     fs.writeFileSync("./db/db.json", JSON.stringify(savedNotes));
     res.json(savedNotes);
 })
+app.get("/", function(req, res) {
+    res.json(path.join(__dirname, "public/index.html"));
+  });
 app.get("*", (req, res) => {
     res.sendFile(path.join(__dirname, "./public/index.html"))
 });
